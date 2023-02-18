@@ -1,12 +1,11 @@
 import {
-  Switch,
+  createStyles,
   Group,
-  useMantineColorScheme,
-  useMantineTheme,
+  Switch,
   Title,
-  createStyles
-} from '@mantine/core';
-import { IconSun, IconMoonStars } from '@tabler/icons-react';
+  useMantineColorScheme,
+  useMantineTheme} from '@mantine/core';
+import { IconMoonStars,IconSun } from '@tabler/icons-react';
 
 const useStyles = createStyles((theme) => ({
   navbar: {

@@ -12,6 +12,7 @@ specifiers:
   '@vitejs/plugin-react-swc': ^3.0.0
   eslint: ^8.34.0
   eslint-config-react-app: ^7.0.1
+  eslint-plugin-simple-import-sort: ^10.0.0
   firebase: ^9.17.1
   react: ^18.2.0
   react-dom: ^18.2.0
@@ -39,6 +40,7 @@ devDependencies:
   '@vitejs/plugin-react-swc': 3.1.0_vite@4.1.2
   eslint: 8.34.0
   eslint-config-react-app: 7.0.1_tseuwpko2uhnzn4cv7fs2adf4m
+  eslint-plugin-simple-import-sort: 10.0.0_eslint@8.34.0
   typescript: 4.9.5
   vite: 4.1.2
   vite-plugin-eslint: 1.8.1_eslint@8.34.0+vite@4.1.2
@@ -3617,6 +3619,14 @@ packages:
       resolve: 2.0.0-next.4
       semver: 6.3.0
       string.prototype.matchall: 4.0.8
+    dev: true
+
+  /eslint-plugin-simple-import-sort/10.0.0_eslint@8.34.0:
+    resolution: {integrity: sha512-AeTvO9UCMSNzIHRkg8S6c3RPy5YEwKWSQPx3DYghLedo2ZQxowPFLGDN1AZ2evfg6r6mjBSZSLxLFsWSu3acsw==}
+    peerDependencies:
+      eslint: '>=5.0.0'
+    dependencies:
+      eslint: 8.34.0
     dev: true
 
   /eslint-plugin-testing-library/5.10.2_7kw3g6rralp5ps6mg3uyzz6azm:

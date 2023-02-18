@@ -1,13 +1,12 @@
 import {
-  MantineProvider,
-  ColorSchemeProvider,
   ColorScheme,
+  ColorSchemeProvider,
+  MantineProvider,
 } from '@mantine/core';
-import { NotificationsProvider } from '@mantine/notifications';
-
 import { useHotkeys, useLocalStorage } from '@mantine/hooks';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { NotificationsProvider } from '@mantine/notifications';
 import { Authentication, Homepage, NotFound } from 'pages';
+import { BrowserRouter, Route,Routes } from 'react-router-dom';
 
 const App = () => {
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({

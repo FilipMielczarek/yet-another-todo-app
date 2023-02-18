@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { TextInput, Button, PasswordInput, Loader, Stack } from '@mantine/core';
-import { IconAt, IconCircleKeyFilled, IconCheck } from '@tabler/icons-react';
+import { Button, Loader, PasswordInput, Stack,TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
+import { IconAt, IconCheck,IconCircleKeyFilled } from '@tabler/icons-react';
 import { auth } from 'firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { useState } from 'react';
 
 const RegisterForm = () => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);

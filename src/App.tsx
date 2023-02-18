@@ -3,6 +3,8 @@ import {
   ColorSchemeProvider,
   ColorScheme,
 } from '@mantine/core';
+import { NotificationsProvider } from '@mantine/notifications';
+
 import { useHotkeys, useLocalStorage } from '@mantine/hooks';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Authentication, Homepage, NotFound } from 'pages';
@@ -29,13 +31,15 @@ const App = () => {
         withGlobalStyles
         withNormalizeCSS
       >
-        <BrowserRouter>
-          <Routes>
-            <Route path='/' element={<Authentication />} />
-            <Route path='home' element={<Homepage />} />
-            <Route path='*' element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
+        <NotificationsProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path='/' element={<Authentication />} />
+              <Route path='home' element={<Homepage />} />
+              <Route path='*' element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </NotificationsProvider>
       </MantineProvider>
     </ColorSchemeProvider>
   );

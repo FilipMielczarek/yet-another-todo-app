@@ -1,6 +1,8 @@
 import { useState, useCallback } from 'react';
-import { LoginForm, RegisterForm } from 'components';
+import { Header, LoginForm, RegisterForm } from 'components';
 import { AUTHENTICATION_MODE } from 'enums';
+
+import { Container, Space, Text, Button, Group } from '@mantine/core';
 
 const Authentication = () => {
   const [authMode, setAuthMode] = useState<
@@ -15,26 +17,36 @@ const Authentication = () => {
   );
 
   return (
-    <div>
-      <button
-        onClick={() => handleSetAuthMode(AUTHENTICATION_MODE.LOGIN)}
-        disabled={authMode === AUTHENTICATION_MODE.LOGIN}
-      >
-        Login
-      </button>
-      <button
-        onClick={() => handleSetAuthMode(AUTHENTICATION_MODE.REGISTER)}
-        disabled={authMode === AUTHENTICATION_MODE.REGISTER}
-      >
-        Register
-      </button>
-
+    <Container>
+      <Header />
+      <Text ta='center'>Please login or register</Text>
+      <Space h='xl' />
+      <Group position='center' my={30}>
+        <Button
+          color='indigo'
+          variant={
+            authMode === AUTHENTICATION_MODE.LOGIN ? 'filled' : 'outline'
+          }
+          onClick={() => handleSetAuthMode(AUTHENTICATION_MODE.LOGIN)}
+        >
+          Login
+        </Button>
+        <Button
+          color='indigo'
+          variant={
+            authMode === AUTHENTICATION_MODE.REGISTER ? 'filled' : 'outline'
+          }
+          onClick={() => handleSetAuthMode(AUTHENTICATION_MODE.REGISTER)}
+        >
+          Register
+        </Button>
+      </Group>
       {authMode === AUTHENTICATION_MODE.LOGIN ? (
         <LoginForm />
       ) : (
         <RegisterForm />
       )}
-    </div>
+    </Container>
   );
 };
 

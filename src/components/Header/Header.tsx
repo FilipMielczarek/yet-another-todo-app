@@ -4,9 +4,9 @@ import {
   useMantineColorScheme,
   useMantineTheme,
   Title,
+  createStyles
 } from '@mantine/core';
 import { IconSun, IconMoonStars } from '@tabler/icons-react';
-import { createStyles } from '@mantine/core';
 
 const useStyles = createStyles((theme) => ({
   navbar: {

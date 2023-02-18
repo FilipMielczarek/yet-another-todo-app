@@ -1,1 +1,1 @@
-export { AUTHENTICATION_MODE } from './authenticationMode';
+export { AUTHENTICATION_MODE } from './authenticationMode'

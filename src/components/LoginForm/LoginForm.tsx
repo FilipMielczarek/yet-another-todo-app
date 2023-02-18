@@ -1,4 +1,4 @@
 const LoginForm = () => {
-  return <div>LoginForm</div>;
-};
-export default LoginForm;
+  return <div>LoginForm</div>
+}
+export default LoginForm

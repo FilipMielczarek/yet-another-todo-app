@@ -35,7 +35,14 @@ const App = () => {
                   </AuthRoute>
                 }
               />
-              <Route path="/login" element={<Authentication />} />
+              <Route
+                path="/login"
+                element={
+                  <AuthRoute>
+                    <Authentication />
+                  </AuthRoute>
+                }
+              />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

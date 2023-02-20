@@ -16,7 +16,7 @@ const AuthRoute = ({ children }: AuthRouteProps) => {
       if (!user) {
         navigate(PAGE.AUTHENTICATE)
       } else {
-        return
+        navigate(PAGE.HOME)
       }
     })
 

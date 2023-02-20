@@ -1,4 +1,4 @@
-import { Button, Loader, PasswordInput, Stack, TextInput } from '@mantine/core'
+import { Button, Checkbox, Loader, PasswordInput, Stack, TextInput } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { showNotification } from '@mantine/notifications'
 import { IconAt, IconCheck, IconCircleKeyFilled } from '@tabler/icons-react'
@@ -10,13 +10,18 @@ const RegisterForm = () => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
 
   const form = useForm({
-    initialValues: { email: '', password: '' },
+    initialValues: { email: '', password: '', agreeToTerms: false },
 
     validate: {
       email: (value: string) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
 
       password: (value: string) =>
-        /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(value) ? null : 'Invalid password',
+        /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(value)
+          ? null
+          : 'The password does not meet the requirements',
+
+      agreeToTerms: (value: boolean) =>
+        value ? null : 'You must agree to the terms and conditions',
     },
   })
 
@@ -61,6 +66,7 @@ const RegisterForm = () => {
           {...form.getInputProps('email')}
         />
         <PasswordInput
+          mb={12}
           placeholder="Password"
           label="Password"
           aria-label="Password"
@@ -69,9 +75,13 @@ const RegisterForm = () => {
           description="Minimum eight characters, at least one letter and one number"
           {...form.getInputProps('password')}
         />
+        <Checkbox
+          label="I agree to the terms and conditions"
+          {...form.getInputProps('agreeToTerms')}
+        />
         <Stack>
           <Button type="submit" mt="sm">
-            Submit
+            Register
           </Button>
           {isSubmitting ? <Loader /> : null}
         </Stack>

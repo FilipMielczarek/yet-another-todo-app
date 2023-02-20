@@ -28,7 +28,7 @@ const App = () => {
           <BrowserRouter>
             <Routes>
               <Route
-                path="/"
+                path="/home"
                 element={
                   <AuthRoute>
                     <Homepage />

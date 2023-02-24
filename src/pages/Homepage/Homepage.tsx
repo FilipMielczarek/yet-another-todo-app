@@ -1,15 +1,13 @@
-import { auth } from 'firebase'
-import { signOut } from 'firebase/auth'
-
+import { AuthContext } from 'context'
+import { useContext } from 'react'
 const Homepage = () => {
-  const handleSignOut = () => {
-    signOut(auth)
-    localStorage.removeItem('myPage.expectSignIn')
-  }
+  const { currentUser, signOut } = useContext(AuthContext)
 
   return (
     <div>
-      Homepage <button onClick={handleSignOut}>Sign out of Firebase</button>
+      <h3>Welcome! {currentUser?.email}</h3>
+      <p>Sign In Status: {currentUser && 'active'}</p>
+      <button onClick={signOut}>Sign Out</button>
     </div>
   )
 }

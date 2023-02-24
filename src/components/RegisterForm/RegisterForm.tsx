@@ -2,8 +2,7 @@ import { Button, Checkbox, Loader, PasswordInput, Stack, TextInput } from '@mant
 import { useForm } from '@mantine/form'
 import { showNotification } from '@mantine/notifications'
 import { IconAt, IconCheck, IconCircleKeyFilled } from '@tabler/icons-react'
-import { auth } from 'firebase'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { signUpUser } from 'firebase'
 import { useState } from 'react'
 
 const RegisterForm = () => {
@@ -29,12 +28,12 @@ const RegisterForm = () => {
 
   const registerUser = () => {
     setIsSubmitting(prev => !prev)
-    createUserWithEmailAndPassword(auth, email, password)
+    signUpUser(email, password)
       .then(res => {
         setIsSubmitting(prev => !prev)
         showNotification({
           title: 'Success!',
-          message: `Your account was created with an email address: ${res.user.email} `,
+          message: `Your account was created with an email address: ${email} `,
           icon: <IconCheck size={16} />,
           color: 'teal',
           autoClose: 5000,

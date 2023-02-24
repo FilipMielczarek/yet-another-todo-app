@@ -1,4 +1,4 @@
 export enum PAGE {
-  HOME = '/home',
+  HOME = '/',
   AUTHENTICATE = '/login',
 }

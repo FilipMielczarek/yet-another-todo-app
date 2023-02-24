@@ -3,8 +3,7 @@ import { useForm } from '@mantine/form'
 import { showNotification } from '@mantine/notifications'
 import { IconAt, IconCheck, IconCircleKeyFilled } from '@tabler/icons-react'
 import { PAGE } from 'enums'
-import { auth } from 'firebase'
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import { signInUser } from 'firebase'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -26,7 +25,7 @@ const LoginForm = () => {
 
   const logInUser = () => {
     setIsSubmitting(prev => !prev)
-    signInWithEmailAndPassword(auth, email, password)
+    signInUser(email, password)
       .then(res => {
         navigate(PAGE.HOME)
       })

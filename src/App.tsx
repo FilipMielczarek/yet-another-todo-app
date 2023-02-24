@@ -1,9 +1,9 @@
 import { ColorScheme, ColorSchemeProvider, MantineProvider } from '@mantine/core'
 import { useHotkeys, useLocalStorage } from '@mantine/hooks'
 import { NotificationsProvider } from '@mantine/notifications'
-import { AuthRoute } from 'components'
+import { RequireAuth } from 'components'
 import { Authentication, Homepage, NotFound } from 'pages'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 
 const App = () => {
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
@@ -25,27 +25,18 @@ const App = () => {
         withNormalizeCSS
       >
         <NotificationsProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route
-                path="/home"
-                element={
-                  <AuthRoute>
-                    <Homepage />
-                  </AuthRoute>
-                }
-              />
-              <Route
-                path="/login"
-                element={
-                  <AuthRoute>
-                    <Authentication />
-                  </AuthRoute>
-                }
-              />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
+          <Routes>
+            <Route
+              index
+              element={
+                <RequireAuth>
+                  <Homepage />
+                </RequireAuth>
+              }
+            />
+            <Route path="/login" element={<Authentication />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         </NotificationsProvider>
       </MantineProvider>
     </ColorSchemeProvider>

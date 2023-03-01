@@ -1,10 +1,10 @@
+import { COLLECTIONS } from 'enums'
+import { db } from 'firebase'
 import { collection, getDocs } from 'firebase/firestore'
 import { Todo } from 'types'
 
-import { db } from './firebase'
-
-const fetchTodos = async () => {
-  const querySnapshot = await getDocs(collection(db, 'todos'))
+export const useFetchTodos = async () => {
+  const querySnapshot = await getDocs(collection(db, COLLECTIONS.TODOS))
   const todos: Todo[] = []
 
   querySnapshot.forEach(doc => {
@@ -16,5 +16,3 @@ const fetchTodos = async () => {
 
   return todos
 }
-
-export default fetchTodos

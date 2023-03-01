@@ -1,4 +1,5 @@
 import { initializeApp } from 'firebase/app'
+import { getFirestore } from 'firebase/firestore'
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -20,6 +21,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
+const db = getFirestore()
 
 const signUpUser = async (email: string, password: string) => {
   if (!email && !password) return
@@ -39,4 +41,4 @@ const userStateListener = (callback: NextOrObserver<User>) => {
 
 const signOutUser = async () => await signOut(auth)
 
-export { app, auth, signInUser, signOutUser, signUpUser, userStateListener }
+export { app, auth, db, signInUser, signOutUser, signUpUser, userStateListener }

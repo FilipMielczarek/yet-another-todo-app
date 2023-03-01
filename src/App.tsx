@@ -1,11 +1,13 @@
 import { ColorScheme, ColorSchemeProvider, MantineProvider } from '@mantine/core'
 import { useHotkeys, useLocalStorage } from '@mantine/hooks'
 import { NotificationsProvider } from '@mantine/notifications'
-import { RequireAuth } from 'components'
 import { Authentication, Homepage, NotFound } from 'pages'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useNavigate } from 'react-router-dom'
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
 
 const App = () => {
+  const queryClient = new QueryClient()
+
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
     key: 'mantine-color-scheme',
     defaultValue: 'light',
@@ -25,18 +27,13 @@ const App = () => {
         withNormalizeCSS
       >
         <NotificationsProvider>
-          <Routes>
-            <Route
-              index
-              element={
-                <RequireAuth>
-                  <Homepage />
-                </RequireAuth>
-              }
-            />
-            <Route path="/login" element={<Authentication />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <QueryClientProvider client={queryClient}>
+            <Routes>
+              <Route index element={<Homepage />} />
+              <Route path="/login" element={<Authentication />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </QueryClientProvider>
         </NotificationsProvider>
       </MantineProvider>
     </ColorSchemeProvider>

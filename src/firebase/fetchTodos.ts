@@ -1,13 +1,7 @@
 import { collection, getDocs } from 'firebase/firestore'
-import { useQuery } from 'react-query'
+import { Todo } from 'types'
 
 import { db } from './firebase'
-
-interface Todo {
-  id: string
-  title: string
-  completed: boolean
-}
 
 const fetchTodos = async () => {
   const querySnapshot = await getDocs(collection(db, 'todos'))

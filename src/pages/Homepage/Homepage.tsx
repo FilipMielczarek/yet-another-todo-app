@@ -3,21 +3,14 @@ import { showNotification } from '@mantine/notifications'
 import { IconCheck } from '@tabler/icons-react'
 import { AddTodo, TodoList } from 'components'
 import { AuthContext } from 'context'
-import { COLLECTIONS } from 'enums'
-import { useFetchTodos } from 'hooks'
+import { useRealtimeTodosQuery } from 'hooks'
 import { useContext } from 'react'
-import { useQuery } from 'react-query'
-import { Todo } from 'types'
 
 const Homepage = () => {
   const { currentUser, signOut } = useContext(AuthContext)
-  const {
-    data: todos,
-    isLoading,
-    error,
-  } = useQuery<Todo[], Error>(COLLECTIONS.TODOS, useFetchTodos)
+  const [todos, loading, error] = useRealtimeTodosQuery()
 
-  if (isLoading) {
+  if (loading) {
     return <LoadingOverlay overlayOpacity={0.7} visible />
   }
 

@@ -1,3 +1,5 @@
+import { deleteTodo } from 'functions'
+
 interface TodoListProps {
   todos: {
     id?: string
@@ -11,7 +13,10 @@ const TodoList = ({ todos }: TodoListProps) => {
       {todos.length !== 0 ? (
         <ul>
           {todos.map(todo => (
-            <li key={todo.id}>{todo.title}</li>
+            <li key={todo.id}>
+              {todo.title}
+              <button onClick={() => deleteTodo(todo.id!)}>Delete</button>
+            </li>
           ))}
         </ul>
       ) : (

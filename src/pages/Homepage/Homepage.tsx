@@ -1,11 +1,11 @@
 import { LoadingOverlay, Modal } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { AddTodo, TodoList } from 'components'
-import { UserAuth } from 'context'
+import { AuthContext } from 'context'
 import { useRealtimeTodosQuery, useSingleTodoQuery } from 'hooks'
-
+import { useContext } from 'react'
 const Homepage = () => {
-  const { currentUser, signOut } = UserAuth()
+  const { currentUser, signOut } = useContext(AuthContext)
   const [opened, { close }] = useDisclosure(false)
   const [todos, isLoading, error] = useSingleTodoQuery()
 

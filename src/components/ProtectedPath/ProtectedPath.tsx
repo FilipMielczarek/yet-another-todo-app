@@ -1,8 +1,9 @@
-import { UserAuth } from 'context'
+import { AuthContext } from 'context'
+import { useContext } from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
 
 const ProtectedPath = ({ children }: { children: JSX.Element }) => {
-  const { currentUser } = UserAuth()
+  const { currentUser } = useContext(AuthContext)
   let location = useLocation()
 
   if (!currentUser) {

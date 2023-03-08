@@ -1,12 +1,12 @@
-import { UserAuth } from 'context'
+import { AuthContext } from 'context'
 import { COLLECTIONS } from 'enums'
 import { db } from 'firebase'
 import { collection, getDocs, query, where } from 'firebase/firestore'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Todo } from 'types'
 
 export const useSingleTodoQuery = () => {
-  const { currentUser } = UserAuth()
+  const { currentUser } = useContext(AuthContext)
   const [todos, setTodos] = useState<Todo[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [error, setError] = useState<any>(null)

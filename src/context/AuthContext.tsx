@@ -1,6 +1,5 @@
 import { auth, signOutUser } from 'firebase'
 import { onAuthStateChanged, User } from 'firebase/auth'
-import { useContext } from 'react'
 import { createContext, ReactNode, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -40,8 +39,4 @@ export const AuthProvider = ({ children }: Props) => {
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
-}
-
-export const UserAuth = () => {
-  return useContext(AuthContext)
 }

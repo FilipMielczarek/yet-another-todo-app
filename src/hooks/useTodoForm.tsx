@@ -27,7 +27,7 @@ export const useTodoForm = () => {
     title: todo,
     date: new Date(),
     isFinished: false,
-    author: currentUser?.email ?? '',
+    author: currentUser?.uid ?? '',
   }
 
   const addTodo = () => {

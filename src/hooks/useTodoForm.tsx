@@ -1,6 +1,7 @@
 import { useForm } from '@mantine/form'
 import { showNotification } from '@mantine/notifications'
 import { IconCheck } from '@tabler/icons-react'
+import { UserAuth } from 'context'
 import { COLLECTIONS } from 'enums'
 import { db } from 'firebase'
 import { addDoc, collection } from 'firebase/firestore'
@@ -8,6 +9,7 @@ import { useState } from 'react'
 import { Todo } from 'types'
 
 export const useTodoForm = () => {
+  const { currentUser } = UserAuth()
   const [isAdding, setIsAdding] = useState<boolean>(false)
 
   const form = useForm({
@@ -25,6 +27,7 @@ export const useTodoForm = () => {
     title: todo,
     date: new Date(),
     isFinished: false,
+    author: currentUser?.email ?? '',
   }
 
   const addTodo = () => {

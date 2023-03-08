@@ -9,33 +9,32 @@ export const useRealtimeTodosQuery = (): [Todo[], boolean, Error | undefined] =>
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<Error>()
 
-  const dbRef = collection(db, COLLECTIONS.TODOS)
-
   useEffect(() => {
     const unsubscribe = onSnapshot(
-      dbRef,
+      collection(db, COLLECTIONS.TODOS),
       snapshot => {
-        setLoading(false)
-        const updatedTodos = snapshot.docs.map(doc => {
-          const data = doc.data()
-          return {
+        const updatedTodos: Todo[] = []
+        snapshot.forEach(doc => {
+          updatedTodos.push({
             id: doc.id,
-            title: data.title,
-            isFinished: data.isFinished,
-            date: data.date.toDate(),
-          } as Todo
+            title: doc.data().title,
+            isFinished: doc.data().isFinished,
+            date: doc.data().date.toDate(),
+            author: doc.data().author,
+          })
         })
         updatedTodos.sort((a, b) => +b.date - +a.date)
         setTodos(updatedTodos)
+        setLoading(false)
       },
       error => {
-        setLoading(false)
         setError(error)
+        setLoading(false)
       },
     )
 
     return () => unsubscribe()
-  }, [dbRef])
+  }, [])
 
   return [todos, loading, error]
 }

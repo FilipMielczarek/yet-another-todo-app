@@ -2,11 +2,8 @@ import { initializeApp } from 'firebase/app'
 import {
   createUserWithEmailAndPassword,
   getAuth,
-  NextOrObserver,
-  onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
-  User,
 } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
 
@@ -35,10 +32,6 @@ const signInUser = async (email: string, password: string) => {
   return await signInWithEmailAndPassword(auth, email, password)
 }
 
-const userStateListener = (callback: NextOrObserver<User>) => {
-  return onAuthStateChanged(auth, callback)
-}
-
 const signOutUser = async () => await signOut(auth)
 
-export { app, auth, db, signInUser, signOutUser, signUpUser, userStateListener }
+export { app, auth, db, signInUser, signOutUser, signUpUser }

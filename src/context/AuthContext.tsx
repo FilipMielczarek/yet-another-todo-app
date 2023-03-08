@@ -1,5 +1,6 @@
-import { signOutUser, userStateListener } from 'firebase'
-import { User } from 'firebase/auth'
+import { auth, signOutUser } from 'firebase'
+import { onAuthStateChanged, User } from 'firebase/auth'
+import { useContext } from 'react'
 import { createContext, ReactNode, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -8,7 +9,7 @@ interface Props {
 }
 
 export const AuthContext = createContext({
-  currentUser: {} as User | null,
+  currentUser: null as User | null,
   setCurrentUser: (_user: User) => {},
   signOut: () => {},
 })
@@ -18,13 +19,13 @@ export const AuthProvider = ({ children }: Props) => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    const unsubscribe = userStateListener(user => {
-      if (user) {
-        setCurrentUser(user)
-      }
+    const unsubscribe = onAuthStateChanged(auth, user => {
+      setCurrentUser(user)
     })
-    return unsubscribe
-  }, [setCurrentUser])
+    return () => {
+      unsubscribe()
+    }
+  }, [])
 
   const signOut = () => {
     signOutUser()
@@ -39,4 +40,8 @@ export const AuthProvider = ({ children }: Props) => {
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+}
+
+export const UserAuth = () => {
+  return useContext(AuthContext)
 }

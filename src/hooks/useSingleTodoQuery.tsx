@@ -3,7 +3,7 @@ import { db } from 'firebase'
 import { collection, getDocs } from 'firebase/firestore'
 import { Todo } from 'types'
 
-export const useSingleTodosFetch = async () => {
+export const useSingleTodoQuery = async () => {
   const querySnapshot = await getDocs(collection(db, COLLECTIONS.TODOS))
   const todos: Todo[] = []
 

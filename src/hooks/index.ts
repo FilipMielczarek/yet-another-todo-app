@@ -1,3 +1,3 @@
 export { useRealtimeTodosQuery } from './useRealtimeTodosQuery'
-export { useSingleTodosFetch } from './useSingleTodosFetch'
+export { useSingleTodoQuery } from './useSingleTodoQuery'
 export { useTodoForm } from './useTodoForm'

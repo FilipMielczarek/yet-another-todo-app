@@ -1,10 +1,8 @@
 import { deleteTodo } from 'functions'
+import { Todo } from 'types'
 
 interface TodoListProps {
-  todos: {
-    id?: string
-    title: string
-  }[]
+  todos: Todo[]
 }
 
 const TodoList = ({ todos }: TodoListProps) => {

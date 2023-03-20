@@ -14,7 +14,11 @@ export const useSingleTodoQuery = () => {
   useEffect(() => {
     const fetchTodos = async () => {
       try {
-        const q = query(collection(db, COLLECTIONS.TODOS), where('author', '==', currentUser?.uid))
+        const q = query(
+          collection(db, COLLECTIONS.TODOS),
+          where('author', '==', currentUser !== 'initial' ? currentUser?.uid : ''),
+        )
+
         const querySnapshot = await getDocs(q)
 
         const todos: Todo[] = []

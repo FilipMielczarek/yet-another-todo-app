@@ -8,22 +8,23 @@ interface Props {
 }
 
 export const AuthContext = createContext({
-  currentUser: null as User | null,
+  currentUser: {} as User | 'initial' | null,
   setCurrentUser: (_user: User) => {},
   signOut: () => {},
 })
 
 export const AuthProvider = ({ children }: Props) => {
-  const [currentUser, setCurrentUser] = useState<User | null>(null)
+  const [currentUser, setCurrentUser] = useState<User | 'initial' | null>('initial')
   const navigate = useNavigate()
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, user => {
-      setCurrentUser(user)
+      if (user) {
+        return setCurrentUser(user)
+      }
+      setCurrentUser(null)
     })
-    return () => {
-      unsubscribe()
-    }
+    return unsubscribe
   }, [])
 
   const signOut = () => {

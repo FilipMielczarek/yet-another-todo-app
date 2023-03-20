@@ -1,20 +1,26 @@
+import { AuthContext } from 'context'
 import { COLLECTIONS } from 'enums'
 import { db } from 'firebase'
-import { collection, onSnapshot } from 'firebase/firestore'
-import { useEffect, useState } from 'react'
+import { collection, onSnapshot, query, where } from 'firebase/firestore'
+import { useContext, useEffect, useState } from 'react'
 import { Todo } from 'types'
 
 export const useRealtimeTodosQuery = (): [Todo[], boolean, Error | undefined] => {
+  const { currentUser } = useContext(AuthContext)
   const [todos, setTodos] = useState<Todo[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<Error>()
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(
+    const q = query(
       collection(db, COLLECTIONS.TODOS),
-      snapshot => {
+      where('author', '==', currentUser !== 'initial' ? currentUser?.uid : ''),
+    )
+    const unsubscribe = onSnapshot(
+      q,
+      querySnapshot => {
         const updatedTodos: Todo[] = []
-        snapshot.forEach(doc => {
+        querySnapshot.forEach(doc => {
           updatedTodos.push({
             id: doc.id,
             title: doc.data().title,
@@ -34,7 +40,7 @@ export const useRealtimeTodosQuery = (): [Todo[], boolean, Error | undefined] =>
     )
 
     return () => unsubscribe()
-  }, [])
+  }, [currentUser])
 
   return [todos, loading, error]
 }

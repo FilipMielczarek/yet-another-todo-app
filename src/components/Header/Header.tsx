@@ -1,5 +1,7 @@
 import {
+  Button,
   createStyles,
+  Drawer,
   Group,
   Switch,
   Title,
@@ -7,6 +9,9 @@ import {
   useMantineTheme,
 } from '@mantine/core'
 import { IconMoonStars, IconSun } from '@tabler/icons-react'
+import { IconMenu2 } from '@tabler/icons-react'
+import { AuthContext } from 'context'
+import { useContext, useState } from 'react'
 
 const useStyles = createStyles(theme => ({
   navbar: {
@@ -21,6 +26,9 @@ const useStyles = createStyles(theme => ({
 }))
 
 const Header = () => {
+  const { currentUser, signOut } = useContext(AuthContext)
+  const [opened, setOpened] = useState(false)
+
   const { classes } = useStyles()
   const { colorScheme, toggleColorScheme } = useMantineColorScheme()
   const theme = useMantineTheme()
@@ -36,13 +44,22 @@ const Header = () => {
       >
         Yet Another Todo App
       </Title>
-      <Switch
-        checked={colorScheme === 'dark'}
-        onChange={() => toggleColorScheme()}
-        size="lg"
-        onLabel={<IconSun color={theme.white} size={20} stroke={1.5} />}
-        offLabel={<IconMoonStars color={theme.colors.gray[6]} size={20} stroke={1.5} />}
-      />
+      <Group>
+        <Switch
+          checked={colorScheme === 'dark'}
+          onChange={() => toggleColorScheme()}
+          size="lg"
+          onLabel={<IconSun color={theme.white} size={20} stroke={1.5} />}
+          offLabel={<IconMoonStars color={theme.colors.gray[6]} size={20} stroke={1.5} />}
+        />
+        <Button onClick={() => setOpened(true)}>
+          <IconMenu2 />
+        </Button>
+      </Group>
+      <Drawer opened={opened} onClose={() => setOpened(false)} title="Menu" padding="xl" size="xl">
+        <h3>Welcome: {currentUser !== 'initial' && currentUser?.email}!</h3>
+        <button onClick={signOut}>Sign Out</button>
+      </Drawer>
     </Group>
   )
 }

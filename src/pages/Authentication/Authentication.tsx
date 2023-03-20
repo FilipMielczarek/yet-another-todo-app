@@ -1,5 +1,5 @@
 import { Button, Container, Group, Space, Text } from '@mantine/core'
-import { Header, LoginForm, RegisterForm } from 'components'
+import { AuthenticationHeader, LoginForm, RegisterForm } from 'components'
 import { AUTHENTICATION_MODE } from 'enums'
 import { useCallback, useState } from 'react'
 
@@ -17,7 +17,7 @@ const Authentication = () => {
 
   return (
     <Container>
-      <Header />
+      <AuthenticationHeader />
       <Text ta="center">Please login or register</Text>
       <Space h="xl" />
       <Group position="center" my={30}>

@@ -1,4 +1,5 @@
 export { default as AddTodo } from './AddTodo'
+export { default as AuthenticationHeader } from './AuthenticationHeader'
 export { default as Header } from './Header'
 export { default as LoginForm } from './LoginForm'
 export { default as ProtectedPath } from './ProtectedPath'

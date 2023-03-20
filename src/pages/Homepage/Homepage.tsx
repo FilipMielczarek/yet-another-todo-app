@@ -1,12 +1,9 @@
 import { LoadingOverlay, Modal } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import { AddTodo, TodoList } from 'components'
-import { AuthContext } from 'context'
+import { AddTodo, Header, TodoList } from 'components'
 import { useRealtimeTodosQuery } from 'hooks'
-import { useContext } from 'react'
 
 const Homepage = () => {
-  const { currentUser, signOut } = useContext(AuthContext)
   const [opened, { close }] = useDisclosure(false)
   const [todos, isLoading, error] = useRealtimeTodosQuery()
 
@@ -24,11 +21,9 @@ const Homepage = () => {
 
   return (
     <div>
-      <h3>Welcome! {currentUser !== 'initial' && currentUser?.email}</h3>
-      <p>Sign In Status: {currentUser && currentUser !== 'initial' && 'active'}</p>
-      <button onClick={signOut}>Sign Out</button>
+      <Header />
       <AddTodo />
-      <TodoList todos={todos!} />
+      {/* <TodoList todos={todos!} /> */}
     </div>
   )
 }

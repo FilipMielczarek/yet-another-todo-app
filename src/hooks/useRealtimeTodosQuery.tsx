@@ -24,6 +24,7 @@ export const useRealtimeTodosQuery = (): [Todo[], boolean, Error | undefined] =>
           updatedTodos.push({
             id: doc.id,
             title: doc.data().title,
+            description: doc.data().description,
             isFinished: doc.data().isFinished,
             date: doc.data().date.toDate(),
             author: doc.data().author,

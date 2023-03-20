@@ -1,4 +1,4 @@
-import { Button, Loader, TextInput } from '@mantine/core'
+import { Button, Loader, Textarea, TextInput } from '@mantine/core'
 import { useTodoForm } from 'hooks'
 
 const AddTodo = () => {
@@ -13,6 +13,14 @@ const AddTodo = () => {
         aria-label="New todo"
         withAsterisk
         {...form.getInputProps('todo')}
+      />
+      <Textarea
+        placeholder="Give your todo some more meaning"
+        label="Additional description"
+        aria-label="Todo description (not required)"
+        autosize
+        minRows={2}
+        {...form.getInputProps('description')}
       />
       <Button type="submit" mt="sm">
         Submit

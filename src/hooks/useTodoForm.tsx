@@ -14,18 +14,19 @@ export const useTodoForm = () => {
   const [isAdding, setIsAdding] = useState<boolean>(false)
 
   const form = useForm({
-    initialValues: { todo: '' },
+    initialValues: { todo: '', description: '' },
 
     validate: {
       todo: (value: string) => (value.trim() !== '' ? null : 'Todo cant be empty'),
     },
   })
 
-  const { todo } = form.values
+  const { todo, description } = form.values
   const dbRef = collection(db, COLLECTIONS.TODOS)
 
   const todoData: Todo = {
     title: todo,
+    description: description,
     date: new Date(),
     isFinished: false,
     author: currentUser !== 'initial' ? currentUser?.uid ?? '' : '',
@@ -44,7 +45,7 @@ export const useTodoForm = () => {
           color: 'teal',
           autoClose: 5000,
         })
-        form.setValues({ todo: '' })
+        form.setValues({ todo: '', description: '' })
       })
       .catch(error => {
         setIsAdding(prev => !prev)

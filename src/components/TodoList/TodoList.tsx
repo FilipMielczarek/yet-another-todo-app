@@ -13,6 +13,7 @@ const TodoList = ({ todos }: TodoListProps) => {
           {todos.map(todo => (
             <li key={todo.id}>
               {todo.title}
+              {todo.description}
               {todo.isFinished ? 'Finished' : 'Not finished'}
               <button onClick={() => deleteTodo(todo.id!)}>Delete</button>
               {!todo.isFinished ? <button onClick={() => finishTodo(todo.id!)}>Finish</button> : ''}
